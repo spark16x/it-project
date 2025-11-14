@@ -1,13 +1,13 @@
-# ⚡ Arcfuse
-**Arcfuse by Spark** — A unified web experience that brings together multiple social platforms and digital tools in one powerful space.
+# ⚡ Edudel.lite
+**Edudel.lite by Spark** — A unified web experience that brings together multiple social platforms and digital tools in one powerful space.
 
-🌐 [Open Arcfuse](https://arcfuse.vercel.app)  
+🌐 [Open Edudel.lite](https://edudel-lite.vercel.app)  
 💻 [Visit Spark’s Web](https://spark16x.vercel.app)
 
 ---
 
 ## 🚀 Overview
-**Arcfuse** is designed to simplify your digital life by merging multiple social media dashboards and services into one elegant web interface.  
+**Edudel.lite** is designed to simplify your digital life by merging multiple social media dashboards and services into one elegant web interface.  
 It focuses on **productivity**, **connectivity**, and **simplicity**, letting users manage everything from a single hub.
 
 ---
@@ -31,7 +31,7 @@ It focuses on **productivity**, **connectivity**, and **simplicity**, letting us
 
 ## 🧩 Project Structure
 ```bash
-/arcfuse 
+/Edudel.lite 
   ├─ .github
   │ └── FUNDING.yml
   ├─ app
@@ -65,8 +65,8 @@ packages
 ## 📦 Installation
 Clone the repo and run the following commands:
 ```bash
-git clone https://github.com/spark16x/arcfuse.git
-cd arcfuse
+git clone https://github.com/spark16x/Edudel.lite.git
+cd Edudel.lite
 npm install
 npm run dev
 
@@ -93,7 +93,7 @@ Dark	#00BFFF	#0A0A0A	#1E1E1E
 
 🧠 Vision
 
-Arcfuse is more than a dashboard — it’s a digital ecosystem built to connect, organize, and empower creators and users across the internet.
+Edudel.lite is more than a dashboard — it’s a digital ecosystem built to connect, organize, and empower creators and users across the internet.
 
 
 ---
@@ -113,5 +113,5 @@ Apache License © 2025 Spark
 
 ---
 
-> "Fuse your digital world into one space — with Arcfuse."
+> "Fuse your digital world into one space — with Edudel.lite."
 

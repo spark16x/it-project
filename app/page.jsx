@@ -19,11 +19,11 @@ export default function Home() {
       <div className="text-center p-6 max-w-xl">
         <img
           src="/icons/icon-192x192.png"
-          alt="Arcfuse Logo"
+          alt="Edudel.lite Logo"
           className="w-24 h-24 mx-auto mb-6"
         />
         <h1 className="text-4xl font-bold mb-4 text-[#007BFF]">
-          Welcome to Arcfuse
+          Welcome to Edudel.lite
         </h1>
         <p className="text-lg mb-8">
           Unify all your social platforms in one powerful space.
@@ -46,7 +46,7 @@ export default function Home() {
           theme === "dark" ? "text-[#A0AEC0]" : "text-[#6B7280]"
         }`}
       >
-        © {new Date().getFullYear()} Arcfuse. All rights reserved.
+        © {new Date().getFullYear()} Edudel.lite. All rights reserved.
       </footer>
     </main>
     )
