@@ -49,5 +49,5 @@ export default function Home() {
         © {new Date().getFullYear()} Arcfuse. All rights reserved.
       </footer>
     </main>
-  );
+    )
 }
