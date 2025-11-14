@@ -1,0 +1,59 @@
+name: Spark's Bot
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  Spark-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+          # 1️⃣ Switch to main and merge dev
+      - name: Merge dev → main
+        run: |
+          git fetch origin main
+          git checkout main
+          git merge origin/dev --no-edit || echo "✅ No merge conflicts"
+           git push origin main
+
+      - name: Replace Tailwind vars in JSX
+        run: |
+          VARS="background foreground primary secondary muted accent destructive border input ring chart-1 chart-2 chart-3 chart-4 chart-5 sidebar sidebar-foreground sidebar-primary sidebar-primary-foreground sidebar-accent sidebar-accent-foreground sidebar-border sidebar-ring"
+
+          for FILE in $(find . -name "*.jsx"); do
+            for VAR in $VARS; do
+              sed -E "s/text-${VAR}\b/text-[var(--${VAR})] /g" "$FILE"
+              sed -E "s/bg-${VAR}\b/bg-[var(--${VAR})] /g" "$FILE"
+            done
+          done
+
+
+      - name: Commit changes locally (don’t push to dev)
+        run: |
+          git config --global user.name "Spark' Bot"
+          git config --global user.email "spark2009971@gmail.com"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "🔄 Auto replace Tailwind vars + update packages (from dev)"
+
+      - name: Push generated changes to main branch (without modifying dev)
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull origin main
+          git checkout dev -- .
+          git add .
+          git commit -m "🔄 Auto replace Tailwind vars + update packages (from dev)" || echo "No new changes"
+          git push origin main
