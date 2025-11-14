@@ -10,7 +10,7 @@ export default function SignupPage() {
           <div className="bg-[var(--primary)] text-[var(--primary-foreground)] flex size-6 items-center justify-center rounded-md">
             <GalleryVerticalEnd className="size-4" />
           </div>
-         Arcfuse
+         Edudel.lite
         </a>
         <SignupForm />
       </div>

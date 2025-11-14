@@ -3,7 +3,7 @@ import "./globals.css";
 
 
 export const metadata = {
-  title: "Arcfuse",
+  title: "Edudel.lite",
   description: "Unify all your social platforms in one space.",
   manifest: "/manifest.json",
 };
