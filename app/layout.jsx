@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
-
+import { SplashScreen } from '@/components/SplashScreen.jsx';
 
 export const metadata = {
   title: "Edudel.lite",
@@ -21,7 +21,10 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
-      <body class="w-full h-screen" >{children}</body>
+      <body class="w-full h-screen" >
+        <SplashScreen />
+        {children}
+        </body>
       </ThemeProvider>
     </html>
   );
