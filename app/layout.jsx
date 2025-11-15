@@ -4,7 +4,7 @@ import  SplashScreen  from '@/components/SplashScreen.jsx';
 
 export const metadata = {
   title: "Edudel.lite",
-  description: "Unify all your social platforms in one space.",
+  description: "School mock website",
   manifest: "/manifest.json",
 };
 
