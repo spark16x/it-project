@@ -15,14 +15,6 @@ import {
 export default function Home() {
 
   return (
-    <NavigationMenu>
-  <NavigationMenuList>
-    <NavigationMenuItem>
-      <NavigationMenuLink asChild>
-        <Link href="/docs">Documentation</Link>
-      </NavigationMenuLink>
-    </NavigationMenuItem>
-  </NavigationMenuList>
-</NavigationMenu>
+   <div>Edudel.lite</div>
   )
 }

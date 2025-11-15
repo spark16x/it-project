@@ -1,11 +1,9 @@
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
 import  SplashScreen  from '@/components/SplashScreen.jsx';
-import  Nav  from '@/components/nav.jsx';
-
 
 export const metadata = {
-  title: "Edudel.lite",
+  title: "Edudel.lite | Login",
   description: "School mock website",
   manifest: "/manifest.json",
 };
@@ -25,7 +23,6 @@ export default function RootLayout({ children }) {
           >
       <body class="w-full h-screen" >
         <SplashScreen />
-        <Nav />
         {children}
         </body>
       </ThemeProvider>
