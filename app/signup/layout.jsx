@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider"
-import "./globals.css";
+import "/app/globals.css";
 import  SplashScreen  from '@/components/SplashScreen.jsx';
 
 export const metadata = {
