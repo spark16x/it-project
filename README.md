@@ -1,1 +1,1 @@
-edudel-lite.vercel.app
+[Edudel.lite](edudel-lite.vercel.app)
