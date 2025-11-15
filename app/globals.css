@@ -69,3 +69,27 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+.loading-logo{
+  width: 30%;
+}
+.loading-logo path {
+
+  fill: transparent;
+  stroke: #0095ff;
+  stroke-width: 1;
+  stroke-dasharray: 150;
+  stroke-dashoffset: 150;
+  animation: textAnimation 4s ease-in-out 1 forwards;
+}
+@keyframes textAnimation {
+  0% {
+    stroke-dashoffset:150;
+  }
+  80% {
+    fill: transparent;
+  }
+  100% {
+    fill: #0095ff;
+    stroke-dashoffset: 0;
+  }
+}
