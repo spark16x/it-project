@@ -12,9 +12,10 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 
-export default function Nav() {
+export default function Nav({ className }) {
   
   return (
+    <div className="w-full h-[50px] flex justify-between items-center  fixed top-0 left-0 bg-background  {className}">
     <NavigationMenu>
   <NavigationMenuList>
     <NavigationMenuItem>
@@ -34,5 +35,6 @@ export default function Nav() {
     </NavigationMenuItem>
   </NavigationMenuList>
 </NavigationMenu>
+</div>
   )
 }
