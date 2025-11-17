@@ -19,7 +19,7 @@ export default function Nav({ className }) {
     >
       {/* Logo */}
       <div className="text-xl font-semibold tracking-wide text-white drop-shadow-[0_0_5px_rgba(0,150,255,0.7)]">
-        JARVIS
+        Edudel.lite
       </div>
 
       {/* Nav Menu */}
