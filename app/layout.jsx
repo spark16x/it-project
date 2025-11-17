@@ -1,9 +1,7 @@
-"use client"
-import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
-import SplashScreen from '@/components/SplashScreen.jsx';
-import Nav from '@/components/nav.jsx';
-import { usePathname } from "next/navigation";
+import { ThemeProvider } from "@/components/theme-provider";
+import SplashScreen from "@/components/SplashScreen.jsx";
+import ClientNavWrapper from "@/components/navWrapper.jsx";
 
 export const metadata = {
   title: "Edudel.lite",
@@ -12,16 +10,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname();
-  
-  const hideNav =
-    pathname === "/login" ||
-    pathname === "/signup";
-  
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="google-site-verification" content="7SnpTJD94MylkjVp3A2GY9wDF1Xhvs1yLkq_AH7nJxQ" />
+        <meta
+          name="google-site-verification"
+          content="7SnpTJD94MylkjVp3A2GY9wDF1Xhvs1yLkq_AH7nJxQ"
+        />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
 
@@ -34,12 +29,12 @@ export default function RootLayout({ children }) {
         >
           <SplashScreen />
 
-          {/* Only show Nav when NOT on login/signup */}
-          {!hideNav && <Nav />}
+          {/* client component handles pathname + hiding nav */}
+          <ClientNavWrapper />
 
           {children}
         </ThemeProvider>
       </body>
     </html>
   );
-} 
+}
