@@ -85,7 +85,7 @@ export function LoginForm({
                 <FieldDescription className="text-center">
                   Don&apos;t have an account? <Link href="/signup">Sign up</Link>
                 </FieldDescription>
-              </Field
+              </Field>
             </FieldGroup>
           </form>
         </CardContent>
