@@ -44,6 +44,7 @@ export function LoginForm({
                   </svg>
                   Login with Apple
                 </Button>
+              <Link href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=495918265606-eio30hbt21bg6qldgj6ul8hqdb8sfmmh.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fedudel-lite-server.vercel.app%2Fauth%2Fgoogle%2Fcallback&response_type=code&scope=openid%20email%20profile&prompt=select_account&service=lso&o2v=2&flowName=GeneralOAuthFlow">
                 <Button variant="outline" type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path
@@ -53,6 +54,7 @@ export function LoginForm({
                   </svg>
                   Login with Google
                 </Button>
+                </Link>
               </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                 Or continue with
@@ -83,7 +85,7 @@ export function LoginForm({
                 <FieldDescription className="text-center">
                   Don&apos;t have an account? <Link href="/signup">Sign up</Link>
                 </FieldDescription>
-              </Field>
+              </Field
             </FieldGroup>
           </form>
         </CardContent>
