@@ -7,7 +7,7 @@
       useEffect(() => {
           const timer = setTimeout(() => {
               setHide(true);
-          }, 2500);
+          }, 5000);
           
           return () => clearTimeout(timer);
       }, []);
