@@ -1,8 +1,8 @@
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
-import  SplashScreen  from '@/components/SplashScreen.jsx';
-import  Nav  from '@/components/nav.jsx';
-
+import SplashScreen from '@/components/SplashScreen.jsx';
+import Nav from '@/components/nav.jsx';
+import { usePathname } from "next/navigation";
 
 export const metadata = {
   title: "Edudel.lite",
@@ -11,24 +11,34 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+  
+  const hideNav =
+    pathname === "/login" ||
+    pathname === "/signup";
+  
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="7SnpTJD94MylkjVp3A2GY9wDF1Xhvs1yLkq_AH7nJxQ" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
-      <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-      <body class="w-full h-screen" >
-        <SplashScreen />
-        <Nav />
-        {children}
-        </body>
-      </ThemeProvider>
+
+      <body className="w-full h-screen">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SplashScreen />
+
+          {/* Only show Nav when NOT on login/signup */}
+          {!hideNav && <Nav />}
+
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
-}
+} 
