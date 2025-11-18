@@ -9,7 +9,7 @@ export async function GET(req) {
     secure: true,
     sameSite: "none",
     path: "/",
-    domain: "https://edudel-lite.vercel.app", // <-- change this
+    domain: "https://edudel-lite-server.vercel.app", // <-- change this
     maxAge: 60 * 60 * 24 * 7, // 7 days
   });
 
