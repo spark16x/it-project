@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { type Icon } from "@tabler/icons-react"
 
 import {
   SidebarGroup,
@@ -11,16 +10,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 
-export function NavSecondary({
-  items,
-  ...props
-}: {
-  items: {
-    title: string
-    url: string
-    icon: Icon
-  }[]
-} & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
+export function NavSecondary({ items, ...props }) {
   return (
     <SidebarGroup {...props}>
       <SidebarGroupContent>

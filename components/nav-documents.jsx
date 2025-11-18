@@ -5,7 +5,6 @@ import {
   IconFolder,
   IconShare3,
   IconTrash,
-  type Icon,
 } from "@tabler/icons-react"
 
 import {
@@ -25,15 +24,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar'
 
-export function NavDocuments({
-  items,
-}: {
-  items: {
-    name: string
-    url: string
-    icon: Icon
-  }[]
-}) {
+export function NavDocuments({ items }) {
   const { isMobile } = useSidebar()
 
   return (

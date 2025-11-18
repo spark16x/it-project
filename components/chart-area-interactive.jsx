@@ -13,7 +13,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -138,7 +137,7 @@ const chartConfig = {
     label: "Mobile",
     color: "var(--primary)",
   },
-} satisfies ChartConfig
+}
 
 export function ChartAreaInteractive() {
   const isMobile = useIsMobile()
