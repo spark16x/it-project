@@ -13,7 +13,7 @@ export default function SignupPage() {
           </div>
          Edudel.lite
         </a>
-        <SignupForm />
+        <SignupForm onSubmit={}/>
       </div>
     </div>
   )
