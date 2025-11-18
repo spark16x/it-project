@@ -18,7 +18,7 @@ export default function Nav({ className }) {
       `}
     >
       {/* Logo */}
-      <div className="text-xl font-semibold tracking-wide text-white drop-shadow-[0_0_5px_rgba(0,150,255,0.7)]">
+      <div className="text-xl font-semibold tracking-wide text-foreground drop-shadow-[0_0_5px_rgba(0,150,255,0.7)]">
         Edudel.lite
       </div>
 
@@ -34,7 +34,7 @@ export default function Nav({ className }) {
               <NavigationMenuLink
                 asChild
                 className={`
-                  text-white/90 px-2 py-1 transition 
+                  text-foreground px-2 py-1 transition 
                   hover:text-white hover:drop-shadow-[0_0_6px_rgb(0,150,255)]
                 `}
               >
