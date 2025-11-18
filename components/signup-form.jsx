@@ -32,7 +32,7 @@ export function SignupForm({ className, ...props}) {
     setForm({ ...form, [e.target.id]: e.target.value })
   }
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const res = await fetch("https://your-server.com/auth/signup", {
   method: "POST",
