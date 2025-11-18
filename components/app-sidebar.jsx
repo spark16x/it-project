@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import * as React from "react";
 import {
   IconCamera,
   IconChartBar,
@@ -17,12 +17,12 @@ import {
   IconSearch,
   IconSettings,
   IconUsers,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
-import { NavDocuments } from '@/components/nav-documents'
-import { NavMain } from '@/components/nav-main'
-import { NavSecondary } from '@/components/nav-secondary'
-import { NavUser } from '@/components/nav-user'
+import { NavDocuments } from '@/components/nav-documents';
+import { NavMain } from '@/components/nav-main';
+import { NavSecondary } from '@/components/nav-secondary';
+import { NavUser } from '@/components/nav-user';
 import {
   Sidebar,
   SidebarContent,
@@ -31,14 +31,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/components/ui/sidebar'
+} from '@/components/ui/sidebar';
+import { useEffect, useState } from 'react';
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "Dashboard",
@@ -47,61 +43,13 @@ const data = {
     },
     {
       title: "Students",
-      url: "/dashboard/studets",
+      url: "/dashboard/students",
       icon: IconUsers,
     },
     {
-      title: "Attendes",
-      url: "/dashboard/attendes",
+      title: "Attendees",
+      url: "/dashboard/attendees",
       icon: IconUsers,
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
     },
   ],
   navSecondary: [
@@ -121,14 +69,23 @@ const data = {
       icon: IconSearch,
     },
   ],
-}
+};
 
-export async function AppSidebar(props) {
-  
- data.user =  await fetch('https://edudel-lite-server.vercel.app/me', {
-  method: 'GET',
-  credentials: 'include' 
-});
+export function AppSidebar(props) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const response = await fetch('https://edudel-lite-server.vercel.app/me', {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const userData = await response.json();
+      setUser(userData);
+    };
+
+    fetchUserData();
+  }, []);
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -152,8 +109,8 @@ export async function AppSidebar(props) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        {user ? <NavUser user={user} /> : <div>Loading...</div>}
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
