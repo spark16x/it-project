@@ -127,7 +127,6 @@ export async function AppSidebar(props) {
   
  data.user =  await fetch('https://edudel-lite-server.vercel.app/me', {
   method: 'GET',
-  headers: {},
   credentials: 'include' 
 });
 

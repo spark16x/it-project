@@ -1,9 +1,11 @@
 "use client";
-
+import SyllabusCard from '@/components/SyllabusCard.jsx';
 
 export default function Home() {
 
   return (
-   <div>Edudel.lite</div>
+   <div>
+     <SyllabusCard />
+   </div>
   )
 }
