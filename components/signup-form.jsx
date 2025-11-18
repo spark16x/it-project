@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 
-export function SignupForm({ className, ...props, onSubmit }) {
+export function SignupForm({ className, ...props}) {
   // 🔥 All field values stored here
   const [form, setForm] = useState({
     name: "",
