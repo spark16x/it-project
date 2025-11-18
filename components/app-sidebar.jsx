@@ -123,7 +123,14 @@ const data = {
   ],
 }
 
-export function AppSidebar(props) {
+export async function AppSidebar(props) {
+  
+ data.user =  await fetch('https://edudel-lite-server.vercel.app/me', {
+  method: 'GET',
+  headers: {},
+  credentials: 'include' 
+});
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>

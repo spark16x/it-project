@@ -1,4 +1,4 @@
-import "../app/globals.css";
+import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import SplashScreen from "@/components/SplashScreen.jsx";
 import { AppSidebar } from '@/components/app-sidebar'
