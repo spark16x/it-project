@@ -1,10 +1,10 @@
+"use client";
+
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import SplashScreen from "@/components/SplashScreen.jsx";
 import { AppSidebar } from '@/components/app-sidebar'
-import {
-  SidebarProvider,
-} from '@/components/ui/sidebar'
+import { SidebarProvider } from '@/components/ui/sidebar'
 
 export const metadata = {
   title: "Edudel.lite",
@@ -31,18 +31,15 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <SplashScreen />
-           <SidebarProvider
-           style={
-            {
+          <SidebarProvider
+            style={{
               "--sidebar-width": "calc(var(--spacing) * 72)",
               "--header-height": "calc(var(--spacing) * 12)",
-           }
-               }
-               >
-      <AppSidebar variant="inset" />
-          {children}
+            }}
+          >
+            <AppSidebar variant="inset" />
+            {children}
           </SidebarProvider>
-
         </ThemeProvider>
       </body>
     </html>
