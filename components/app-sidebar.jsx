@@ -47,7 +47,7 @@ const data = {
     },
     {
       title: "Attendeces",
-      url: "/dashboard/attendes",
+      url: "/dashboard/attendance",
       icon: IconUsers,
     },
     {
