@@ -34,7 +34,7 @@ export function SignupForm({ className, ...props}) {
   
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await fetch("https://your-server.com/auth/signup", {
+    const res = await fetch("https://edudel-lite-server.vercel.app/auth/signup", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
