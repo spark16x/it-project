@@ -23,7 +23,7 @@ export function NavMain({ items }) {
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton tooltip={item.title}>
                 {item.icon && <item.icon />}
-               <span onClick={()=> redirect('{item.url}')}>{item.title}</span>
+               <span onClick={()=> redirect(item.url)}>{item.title}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
