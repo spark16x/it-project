@@ -11,8 +11,6 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import Link from "next/link"
-'use client'
- 
 import { redirect } from 'next/navigation'
 
 
