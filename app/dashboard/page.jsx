@@ -9,7 +9,7 @@ import {
 import data from "./data.json"
 
 // Force this page to be rendered dynamically (avoid build-time prerender)
-export const dynamic = 'force-dynamic';
+
 
 export default function Page() {
   return (
