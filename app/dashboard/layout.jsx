@@ -11,7 +11,7 @@ import {
 export default function RootLayout({ children }) {
   return (
     
-    <SidebarInset>
+ 
     <SidebarProvider
       style={
         {
@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
         }
       }
     >
+      <SidebarInset>
       <AppSidebar variant="inset" />
               <SiteHeader /> 
               <div className = "flex flex-1 flex-col" >
@@ -29,8 +30,8 @@ export default function RootLayout({ children }) {
                </div> 
              </div> 
             </div>
+            </SidebarInset>
           </SidebarProvider>
-      </SidebarInset>
     
   );
 }

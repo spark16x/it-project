@@ -1,11 +1,12 @@
   "use client"
   import gsap from 'gsap';
   import { useGSAP } from '@gsap/react';
+  import { useEffect, useState } from "react";
   
   gsap.registerPlugin(useGSAP);
   
   
-  import { useEffect, useState } from "react";
+  
   
   export default function SplashScreen() {
       const [hide, setHide] = useState(false);
