@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast"
+
 
 export default function AttendancePage() {
   const [students, setStudents] = useState([
@@ -22,8 +24,16 @@ export default function AttendancePage() {
     );
   };
 
+  const { toast } = useToast()
+
+
+      
+
+
   const handleSubmit = () => {
-    console.log("Final Attendance:", students);
+      toast({
+    title: "Attendance submited"
+  })
 
     // You can later push this to backend, MongoDB, Supabase, etc.
     // fetch("/api/attendance", { method: "POST", body: JSON.stringify(students) })

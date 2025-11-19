@@ -2,6 +2,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import SplashScreen from "@/components/SplashScreen.jsx";
 import ClientNavWrapper from "@/components/navWrapper.jsx";
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata = {
   title: "Edudel.lite",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
           <ClientNavWrapper />
 
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
