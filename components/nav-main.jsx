@@ -11,6 +11,10 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import Link from "next/link"
+'use client'
+ 
+import { redirect } from 'next/navigation'
+
 
 export function NavMain({ items }) {
   return (
@@ -21,7 +25,7 @@ export function NavMain({ items }) {
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton tooltip={item.title}>
                 {item.icon && <item.icon />}
-               <span>{item.title}</span>
+               <span onClick={()=> redirect('{item.url}')}>{item.title}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
