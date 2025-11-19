@@ -18,19 +18,6 @@ export default function AttendancePage() {
     { id: 8, name: "Sanya Gupta", roll: 8 },
   ]
 
-  const [attendance, setAttendance] = useState({})
-
-  const toggleAttendance = (id) => {
-    setAttendance((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }))
-  }
-
-  const handleSubmit = () => {
-    console.log("Attendance submitted: ", attendance)
-    alert("Attendance saved bro 🔥 (check console)")
-  }
 
   // return (
   //   <div className="max-w-3xl mx-auto py-10">
