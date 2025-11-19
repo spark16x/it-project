@@ -5,8 +5,8 @@ import Link from "next/link"
 
 export default function SyllabusCard() {
   const syllabusLinks = [
-    { name: "Class 11 – Accountancy", url: "/syllabus/accountancy" },
-    { name: "Class 11 – Business Studies", url: "/syllabus/business-studies" },
+    { name: "Class 11 – Accountancy", url: "/syllabus/11_accountancy_EM.pdf" },
+    { name: "Class 11 – Business Studies", url: "/syllabus/11_businessstudy_EM.pdf" },
     { name: "Class 11 – Economics", url: "/syllabus/economics" },
     { name: "Class 11 – English", url: "/syllabus/english" },
     { name: "Class 11 – IT (802)", url: "/syllabus/it-802" },
