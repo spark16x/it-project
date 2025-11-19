@@ -1,30 +1,11 @@
 
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import SplashScreen from "@/components/SplashScreen.jsx";
 import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarProvider } from '@/components/ui/sidebar'
 
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta
-          name="google-site-verification"
-          content="7SnpTJD94MylkjVp3A2GY9wDF1Xhvs1yLkq_AH7nJxQ"
-        />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-      </head>
-
-      <body className="w-full h-screen">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SplashScreen />
           <SidebarProvider
             style={{
               "--sidebar-width": "calc(var(--spacing) * 72)",
@@ -34,8 +15,5 @@ export default function RootLayout({ children }) {
             <AppSidebar variant="inset" />
             {children}
           </SidebarProvider>
-        </ThemeProvider>
-      </body>
-    </html>
   );
 }
