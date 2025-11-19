@@ -40,7 +40,6 @@ export default function AttendancePage() {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center p-6 bg-black">
       <Card className="w-full max-w-3xl bg-neutral-900 text-white shadow-xl border-neutral-700">
         <CardHeader>
           <CardTitle className="text-xl text-blue-400">Student Attendance</CardTitle>
@@ -116,6 +115,5 @@ export default function AttendancePage() {
 
         </CardContent>
       </Card>
-    </div>
   );
 }
