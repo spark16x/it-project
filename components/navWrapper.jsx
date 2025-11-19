@@ -10,7 +10,8 @@ export default function ClientNavWrapper() {
     pathname === "/login" ||
     pathname === "/signup" ||
     pathname === "/dashboard" ||
-    pathname === "/dashboard/attendance";
+    pathname === "/dashboard/attendance" ||
+    pathname === "/dashboard/students";
   
   return !hideNav && <Nav />;
 }
