@@ -8,10 +8,12 @@ import {
 
 import data from "./data.json"
 
+// Force this page to be rendered dynamically (avoid build-time prerender)
+export const dynamic = 'force-dynamic';
+
 export default function Page() {
   return (
-   
-      <SidebarInset>
+    <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
