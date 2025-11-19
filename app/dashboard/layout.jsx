@@ -6,11 +6,6 @@ import SplashScreen from "@/components/SplashScreen.jsx";
 import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarProvider } from '@/components/ui/sidebar'
 
-export const metadata = {
-  title: "Edudel.lite",
-  description: "School mock website",
-  manifest: "/manifest.json",
-};
 
 export default function RootLayout({ children }) {
   return (
