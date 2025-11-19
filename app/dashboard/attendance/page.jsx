@@ -69,7 +69,7 @@ export default function AttendancePage() {
                     <Checkbox
                       checked={stu.status === "present"}
                       onCheckedChange={() => changeStatus(stu.id, "present")}
-                      className="data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600"
+                      className="data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600  dark:data-[state=checked]:border-green-600 dark:data-[state=checked]:bg-green-600"
                     />
                   </TableCell>
 
@@ -78,7 +78,7 @@ export default function AttendancePage() {
                     <Checkbox
                       checked={stu.status === "absent"}
                       onCheckedChange={() => changeStatus(stu.id, "absent")}
-                      className="data-[state=checked]:border-red-600 data-[state=checked]:bg-red-600"
+                      className="data-[state=checked]:border-red-600 data-[state=checked]:bg-red-600 dark:data-[state=checked]:border-red-600 dark:data-[state=checked]:bg-red-600"
                     />
                   </TableCell>
 
@@ -87,7 +87,7 @@ export default function AttendancePage() {
                     <Checkbox
                       checked={stu.status === "leave"}
                       onCheckedChange={() => changeStatus(stu.id, "leave")}
-                      className="data-[state=checked]:border-orange-600 data-[state=checked]:bg-orange-600"
+                      className="data-[state=checked]:border-orange-600 data-[state=checked]:bg-orange-600 dark:data-[state=checked]:border-orange-600 dark:data-[state=checked]:bg-orange-600"
                     />
                   </TableCell>
 
@@ -96,7 +96,7 @@ export default function AttendancePage() {
                     <Checkbox
                       checked={stu.status === "others"}
                       onCheckedChange={() => changeStatus(stu.id, "others")}
-                      className="data-[state=checked]:border-gray-500 data-[state=checked]:bg-gray-500"
+                      className="data-[state=checked]:border-gray-500 data-[state=checked]:bg-gray-500 dark:data-[state=checked]:border-gray-500 dark:data-[state=checked]:bg-gray-500"
                     />
                   </TableCell>
                 </TableRow>
