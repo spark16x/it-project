@@ -6,8 +6,8 @@ import {
 
 export default function RootLayout({ children }) {
   return (
-
-   
+    
+    <SidebarInset>
     <SidebarProvider
       style={
         {
@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
       <AppSidebar variant="inset" />
           {children}
           </SidebarProvider>
-
+      </SidebarInset>
+    
   );
 }
