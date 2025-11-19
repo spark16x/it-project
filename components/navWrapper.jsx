@@ -9,7 +9,8 @@ export default function ClientNavWrapper() {
   const hideNav =
     pathname === "/login" ||
     pathname === "/signup" ||
-    pathname === "/dashboard";
+    pathname === "/dashboard" ||
+    pathname === "/dashboard/attendance";
   
   return !hideNav && <Nav />;
 }
