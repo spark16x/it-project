@@ -7,10 +7,11 @@ import { SidebarTrigger } from '@/components/ui/sidebar'
 import { useEffect, useState } from "react";
 
 export function SiteHeader() {
-  const pathname = usePathname();
+  
   const [name, setName] = useState('Dashboard');  
   
     useEffect(() => {
+      const pathname = usePathname();
     if (pathname === "/dashboard") {
       setName('Dashboard')
     } else if (pathname ==="/dashboard/attendance") {
