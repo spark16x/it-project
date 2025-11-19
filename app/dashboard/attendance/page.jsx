@@ -32,45 +32,48 @@ export default function AttendancePage() {
     alert("Attendance saved bro 🔥 (check console)")
   }
 
+  // return (
+  //   <div className="max-w-3xl mx-auto py-10">
+  //     <Card className="shadow-[0_0_20px] shadow-blue-500/40">
+  //       <CardHeader>
+  //         <CardTitle className="text-center text-xl">
+  //           📋 Class Attendance
+  //         </CardTitle>
+  //       </CardHeader>
+
+  //       <CardContent className="space-y-4">
+  //         {/* Table-like UI */}
+  //         <div className="grid grid-cols-3 font-medium border-b pb-2">
+  //           <p>Roll</p>
+  //           <p>Name</p>
+  //           <p>Status</p>
+  //         </div>
+
+  //         {students.map((student) => (
+  //           <div
+  //             key={student.id}
+  //             className="grid grid-cols-3 items-center py-2 border-b"
+  //           >
+  //             <p>{student.roll}</p>
+  //             <p>{student.name}</p>
+  //             <Checkbox
+  //               checked={attendance[student.id] || false}
+  //               onCheckedChange={() => toggleAttendance(student.id)}
+  //             />
+  //           </div>
+  //         ))}
+
+  //         <Button
+  //           onClick={handleSubmit}
+  //           className="w-full mt-4"
+  //         >
+  //           Save Attendance
+  //         </Button>
+  //       </CardContent>
+  //     </Card>
+  //   </div>
+  // )
   return (
-    <div className="max-w-3xl mx-auto py-10">
-      <Card className="shadow-[0_0_20px] shadow-blue-500/40">
-        <CardHeader>
-          <CardTitle className="text-center text-xl">
-            📋 Class Attendance
-          </CardTitle>
-        </CardHeader>
-
-        <CardContent className="space-y-4">
-          {/* Table-like UI */}
-          <div className="grid grid-cols-3 font-medium border-b pb-2">
-            <p>Roll</p>
-            <p>Name</p>
-            <p>Status</p>
-          </div>
-
-          {students.map((student) => (
-            <div
-              key={student.id}
-              className="grid grid-cols-3 items-center py-2 border-b"
-            >
-              <p>{student.roll}</p>
-              <p>{student.name}</p>
-              <Checkbox
-                checked={attendance[student.id] || false}
-                onCheckedChange={() => toggleAttendance(student.id)}
-              />
-            </div>
-          ))}
-
-          <Button
-            onClick={handleSubmit}
-            className="w-full mt-4"
-          >
-            Save Attendance
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
+    <div>attendance</div>
   )
 }
