@@ -18,8 +18,10 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import { useToast } from "@/hooks/use-toast"
 
 export function SignupForm({ className, ...props}) {
+  const { toast } = useToast()
   // 🔥 All field values stored here
   const [form, setForm] = useState({
     name: "",
@@ -45,6 +47,10 @@ export function SignupForm({ className, ...props}) {
     password: form.password
   })
 });
+   toast({
+     title: res.message
+   })
+
   }
   
   return (
