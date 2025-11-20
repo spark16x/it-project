@@ -21,7 +21,7 @@
       
       useGSAP(() => {
           // gsap code here...
-          gsap.to('#splash', { scale:1.5, opacity:0, duration: 2 }); // <-- automatically reverted
+          gsap.to('#splash', { scale:1.5, opacity:0, duration: 2, delay:4 }); // <-- automatically reverted
       },[]); // <-- scope is for selector text (optional)
       
       
