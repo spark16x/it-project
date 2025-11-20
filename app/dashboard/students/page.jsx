@@ -22,14 +22,13 @@ import {
 } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Pencil, Trash2 } from "lucide-react";
+import data from "./data.json"
+
 
 export default function StudentsPage() {
-  const [students, setStudents] = useState([
-    { id: 1, name: "Aarav Sharma", grade: "XI-B", roll: 12 },
-    { id: 2, name: "Riya Mehta", grade: "XI-B", roll: 9 },
-  ]);
+  const [students, setStudents] = useState(data);
 
-  const [form, setForm] = useState({ id: null, name: "", grade: "", roll: "" });
+  const [form, setForm] = useState({ id: null, name: "", "Class": "", roll: "" });
   const [isEditing, setIsEditing] = useState(false);
 
   const handleSubmit = () => {
@@ -44,7 +43,7 @@ export default function StudentsPage() {
       ]);
     }
 
-    setForm({ id: null, name: "", grade: "", roll: "" });
+    setForm({ id: null, name: "", "Class": "", roll: "" });
     setIsEditing(false);
   };
 
@@ -92,10 +91,10 @@ export default function StudentsPage() {
                 <div>
                   <Label>Grade</Label>
                   <Input
-                    value={form.grade}
+                    value={form.class}
                     placeholder="Class (e.g. XI-B)"
                     onChange={(e) =>
-                      setForm({ ...form, grade: e.target.value })
+                      setForm({ ...form, "Class": e.target.value })
                     }
                   />
                 </div>
@@ -127,17 +126,17 @@ export default function StudentsPage() {
               <TableRow>
                 <TableHead>Name</TableHead>
                 <TableHead>Class</TableHead>
-                <TableHead>Roll No.</TableHead>
+                <TableHead>Section.</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
 
             <TableBody>
               {students.map((student) => (
-                <TableRow key={student.id}>
-                  <TableCell>{student.name}</TableCell>
-                  <TableCell>{student.grade}</TableCell>
-                  <TableCell>{student.roll}</TableCell>
+                <TableRow>
+                  <TableCell>{student.Name}</TableCell>
+                  <TableCell>{student.Class}</TableCell>
+                  <TableCell>{student.Section}</TableCell>
 
                   <TableCell className="text-right space-x-2">
                     <Dialog>
