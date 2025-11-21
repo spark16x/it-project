@@ -20,7 +20,6 @@ export default function RootLayout({ children }) {
         />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
-
       <body className="w-full h-screen">
         <ThemeProvider
           attribute="class"
@@ -29,10 +28,8 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <SplashScreen />
-
           {/* client component handles pathname + hiding nav */}
           <ClientNavWrapper />
-
           {children}
           <Toaster />
         </ThemeProvider>
