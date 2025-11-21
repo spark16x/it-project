@@ -126,7 +126,9 @@ export default function StudentsPage() {
               <TableRow>
                 <TableHead>Name</TableHead>
                 <TableHead>Class</TableHead>
-                <TableHead>Section.</TableHead>
+                <TableHead>Section</TableHead>
+                <TableHead>Father name</TableHead>
+                <TableHead>Mother name</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -137,6 +139,8 @@ export default function StudentsPage() {
                   <TableCell>{student.Name}</TableCell>
                   <TableCell>{student.Class}</TableCell>
                   <TableCell>{student.Section}</TableCell>
+                  <TableCell>{student['Father Name']}</TableCell>
+                  <TableCell>{student['Mother Name']}</TableCell>
 
                   <TableCell className="text-right space-x-2">
                     <Dialog>
