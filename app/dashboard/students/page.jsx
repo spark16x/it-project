@@ -22,15 +22,24 @@ import {
 } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Pencil, Trash2 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import data from "./data.json"
 
 
 export default function StudentsPage() {
   const [students, setStudents] = useState(data);
-
+  
   const [form, setForm] = useState({ id: null, name: "", "Class": "", roll: "" });
   const [isEditing, setIsEditing] = useState(false);
-
+  
   const handleSubmit = () => {
     if (isEditing) {
       setStudents((prev) =>
@@ -42,27 +51,46 @@ export default function StudentsPage() {
         { ...form, id: Date.now() },
       ]);
     }
-
+    
     setForm({ id: null, name: "", "Class": "", roll: "" });
     setIsEditing(false);
   };
-
+  
   const handleEdit = (student) => {
     setForm(student);
     setIsEditing(true);
   };
-
+  
   const deleteStudent = (id) => {
     setStudents((prev) => prev.filter((s) => s.id !== id));
   };
-
+  
   return (
     <div className="p-6 space-y-6">
+      <Card className="border border-primary/20">
+        <CardContent>
+    <Select>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a Class" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Class</SelectLabel>
+          <SelectItem value="apple">1</SelectItem>
+          <SelectItem value="banana">2</SelectItem>
+          <SelectItem value="blueberry">3</SelectItem>
+          <SelectItem value="grapes">4</SelectItem>
+          <SelectItem value="pineapple">5</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+        </CardContent>
+      </Card>
       <Card className="border border-primary/20">
         <CardHeader className="flex flex-row justify-between items-center">
           <CardTitle className="text-xl">Students</CardTitle>
           
-          <Input type="text" placeholder="Search" />
+          <Input type="text" placeholder="Search" className="w-[100px]" />
           {/* ADD STUDENT BUTTON */}
           <Dialog>
             <DialogTrigger asChild>

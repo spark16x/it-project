@@ -26,7 +26,7 @@ export function NavMain({ items }) {
             <SidebarMenuItem key={item.title}  onClick={()=>{
             redirect(item.url) 
             setOpenedTab(item.title)  
-            }} className={openedTab == item.title && "bg-[calc(var(--background)/10)]"}>
+            }} className={openedTab !== item.title && "bg-[calc(var(--background)/10)]"}>
               <SidebarMenuButton tooltip={item.title}>
                 {item.icon && <item.icon />}
                <span>{item.title}</span>
