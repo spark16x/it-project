@@ -61,7 +61,8 @@ export default function StudentsPage() {
       <Card className="border border-primary/20">
         <CardHeader className="flex flex-row justify-between items-center">
           <CardTitle className="text-xl">Students</CardTitle>
-
+          
+          <Input type="text" placeholder="Search" />
           {/* ADD STUDENT BUTTON */}
           <Dialog>
             <DialogTrigger asChild>
