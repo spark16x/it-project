@@ -15,15 +15,20 @@ import { redirect } from 'next/navigation'
 
 
 export function NavMain({ items }) {
+  const [openedTab ,setOpenedTab] = useState('Dashboard')
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
+            <SidebarMenuItem key={item.title}  onClick={()=>{
+            redirect(item.url) 
+            setOpenedTab(item.title)  
+            }} className={openedTab == item.title && "bg-[calc(var(--background)/10)]"}>
               <SidebarMenuButton tooltip={item.title}>
                 {item.icon && <item.icon />}
-               <span onClick={()=> redirect(item.url)}>{item.title}</span>
+               <span>{item.title}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
