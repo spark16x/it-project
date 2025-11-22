@@ -42,7 +42,7 @@ export default function AttendancePage() {
   return (
       <Card className="w-full max-w-3xl  shadow-xl border-neutral-700">
         <CardHeader>
-          <CardTitle className="text-xl text-blue-400">Student Attendance</CardTitle>
+          <CardTitle className="text-xl text-primary-foreground">Student Attendance</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
