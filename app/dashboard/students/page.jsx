@@ -36,6 +36,7 @@ import data from "./data.json"
 
 export default function StudentsPage() {
   const [students, setStudents] = useState(data);
+  let classes=['LKG/KG1/PP2','UKG/KG2/PP1','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII']
   
   const [form, setForm] = useState({ id: null, name: "", "Class": "", roll: "" });
   const [isEditing, setIsEditing] = useState(false);
@@ -76,11 +77,9 @@ export default function StudentsPage() {
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Class</SelectLabel>
-          <SelectItem value="apple">1</SelectItem>
-          <SelectItem value="banana">2</SelectItem>
-          <SelectItem value="blueberry">3</SelectItem>
-          <SelectItem value="grapes">4</SelectItem>
-          <SelectItem value="pineapple">5</SelectItem>
+          {classes.map((value)=>{
+          <SelectItem value={value}>{value}</SelectItem>
+          })}
         </SelectGroup>
       </SelectContent>
     </Select>
