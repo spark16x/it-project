@@ -38,14 +38,17 @@ export default function StudentsPage() {
   const [students, setStudents] = useState([]);
   const [selectedClass, setSelectedClass] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
-  
+
   const [search, setSearch] = useState("");
-  
+
+  // LAZY LOADING STATE
+  const [visibleCount, setVisibleCount] = useState(20);
+
   // Load JSON data initially
   useEffect(() => {
     setStudents(data);
   }, []);
-  
+
   const classes = [
     "LKG/KG1/PP2",
     "UKG/KG2/PP1",
@@ -62,7 +65,7 @@ export default function StudentsPage() {
     "XI",
     "XII",
   ];
-  
+
   const sections = {
     "LKG/KG1/PP2": ["A"],
     "UKG/KG2/PP1": ["A"],
@@ -79,7 +82,7 @@ export default function StudentsPage() {
     XI: ["A", "B", "C", "D"],
     XII: ["A", "B", "C", "D", "E", "F"],
   };
-  
+
   const [form, setForm] = useState({
     id: null,
     Name: "",
@@ -89,13 +92,13 @@ export default function StudentsPage() {
     "Father Name": "",
     "Mother Name": "",
   });
-  
+
   const [isEditing, setIsEditing] = useState(false);
-  
+
   // Handle Add + Update
   const handleSubmit = () => {
     if (!form.Name || !form.Class || !form.Section) return;
-    
+
     if (isEditing) {
       setStudents((prev) =>
         prev.map((s) => (s.id === form.id ? form : s))
@@ -103,7 +106,7 @@ export default function StudentsPage() {
     } else {
       setStudents((prev) => [...prev, { ...form, id: Date.now() }]);
     }
-    
+
     setIsEditing(false);
     setForm({
       id: null,
@@ -115,31 +118,35 @@ export default function StudentsPage() {
       "Mother Name": "",
     });
   };
-  
+
   const handleEdit = (student) => {
     setForm(student);
     setIsEditing(true);
   };
-  
+
   const deleteStudent = (id) => {
     setStudents((prev) => prev.filter((s) => s.id !== id));
   };
-  
-  // Filter students: first Class + Section → then Search
+
+  // Filter students: Class + Section → Search → Lazy Loading
   const filteredStudents = students
     .filter(
       (s) =>
-      selectedClass &&
-      selectedSection &&
-      s.Class === selectedClass &&
-      s.Section === selectedSection
+        selectedClass &&
+        selectedSection &&
+        s.Class === selectedClass &&
+        s.Section === selectedSection
     )
-    .filter((s) => [s.Name, s.Roll, s["Father Name"], s["Mother Name"]]
-      .join(" ")
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    .filter((s) =>
+      [s.Name, s.Roll, s["Father Name"], s["Mother Name"]]
+        .join(" ")
+        .toLowerCase()
+        .includes(search.toLowerCase())
     );
-  
+
+  // Lazy sliced data
+  const visibleStudents = filteredStudents.slice(0, visibleCount);
+
   return (
     <div className="p-6 space-y-6">
       {/* CLASS + SECTION SELECT FIRST */}
@@ -150,6 +157,7 @@ export default function StudentsPage() {
             onValueChange={(value) => {
               setSelectedClass(value);
               setSelectedSection("");
+              setVisibleCount(20);
             }}
           >
             <SelectTrigger className="w-[180px]">
@@ -170,7 +178,10 @@ export default function StudentsPage() {
           {/* SECTION SELECT */}
           <Select
             disabled={!selectedClass}
-            onValueChange={(value) => setSelectedSection(value)}
+            onValueChange={(value) => {
+              setSelectedSection(value);
+              setVisibleCount(20);
+            }}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select Section" />
@@ -246,49 +257,60 @@ export default function StudentsPage() {
           </CardHeader>
 
           <CardContent>
-            {filteredStudents.length ? (
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Class</TableHead>
-                    <TableHead>Section</TableHead>
-                    <TableHead>Father Name</TableHead>
-                    <TableHead>Mother Name</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
+            {visibleStudents.length ? (
+              <>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Class</TableHead>
+                      <TableHead>Section</TableHead>
+                      <TableHead>Father Name</TableHead>
+                      <TableHead>Mother Name</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
 
-                <TableBody>
-                  {filteredStudents.map((student) => (
-                    <TableRow key={student.id}>
-                      <TableCell>{student.Name}</TableCell>
-                      <TableCell>{student.Class}</TableCell>
-                      <TableCell>{student.Section}</TableCell>
-                      <TableCell>{student["Father Name"]}</TableCell>
-                      <TableCell>{student["Mother Name"]}</TableCell>
-                      
-                      <TableCell className="text-right space-x-2">
-                        <Button
-                          size="icon"
-                          variant="outline"
-                          onClick={() => handleEdit(student)}
-                        >
-                          <Pencil size={16} />
-                        </Button>
+                  <TableBody>
+                    {visibleStudents.map((student) => (
+                      <TableRow key={student.id}>
+                        <TableCell>{student.Name}</TableCell>
+                        <TableCell>{student.Class}</TableCell>
+                        <TableCell>{student.Section}</TableCell>
+                        <TableCell>{student["Father Name"]}</TableCell>
+                        <TableCell>{student["Mother Name"]}</TableCell>
 
-                        <Button
-                          size="icon"
-                          variant="destructive"
-                          onClick={() => deleteStudent(student.id)}
-                        >
-                          <Trash2 size={16} />
-                        </Button>
-                      </TableCell>
+                        <TableCell className="text-right space-x-2">
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            onClick={() => handleEdit(student)}
+                          >
+                            <Pencil size={16} />
+                          </Button>
+
+                          <Button
+                            size="icon"
+                            variant="destructive"
+                            onClick={() => deleteStudent(student.id)}
+                          >
+                            <Trash2 size={16} />
+                          </Button>
+                        </TableCell>
                       </TableRow>
-               ))} 
-               </TableBody>
-              </Table>
+                    ))}
+                  </TableBody>
+                </Table>
+
+                {/* LOAD MORE BUTTON */}
+                {visibleCount < filteredStudents.length && (
+                  <div className="flex justify-center py-4">
+                    <Button onClick={() => setVisibleCount(visibleCount + 20)}>
+                      Load More
+                    </Button>
+                  </div>
+                )}
+              </>
             ) : (
               <p>No students found</p>
             )}
