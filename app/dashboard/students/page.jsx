@@ -38,12 +38,14 @@ export default function StudentsPage() {
   const [students, setStudents] = useState([]);
   const [selectedClass, setSelectedClass] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
-
-  // load JSON data
+  
+  const [search, setSearch] = useState("");
+  
+  // Load JSON data initially
   useEffect(() => {
     setStudents(data);
   }, []);
-
+  
   const classes = [
     "LKG/KG1/PP2",
     "UKG/KG2/PP1",
@@ -60,7 +62,7 @@ export default function StudentsPage() {
     "XI",
     "XII",
   ];
-
+  
   const sections = {
     "LKG/KG1/PP2": ["A"],
     "UKG/KG2/PP1": ["A"],
@@ -77,7 +79,7 @@ export default function StudentsPage() {
     XI: ["A", "B", "C", "D"],
     XII: ["A", "B", "C", "D", "E", "F"],
   };
-
+  
   const [form, setForm] = useState({
     id: null,
     Name: "",
@@ -87,12 +89,13 @@ export default function StudentsPage() {
     "Father Name": "",
     "Mother Name": "",
   });
-
+  
   const [isEditing, setIsEditing] = useState(false);
-
+  
+  // Handle Add + Update
   const handleSubmit = () => {
     if (!form.Name || !form.Class || !form.Section) return;
-
+    
     if (isEditing) {
       setStudents((prev) =>
         prev.map((s) => (s.id === form.id ? form : s))
@@ -100,7 +103,8 @@ export default function StudentsPage() {
     } else {
       setStudents((prev) => [...prev, { ...form, id: Date.now() }]);
     }
-
+    
+    setIsEditing(false);
     setForm({
       id: null,
       Name: "",
@@ -110,40 +114,42 @@ export default function StudentsPage() {
       "Father Name": "",
       "Mother Name": "",
     });
-
-    setIsEditing(false);
   };
-
+  
   const handleEdit = (student) => {
     setForm(student);
     setIsEditing(true);
   };
-
+  
   const deleteStudent = (id) => {
     setStudents((prev) => prev.filter((s) => s.id !== id));
   };
-
-  // filtered students ONLY after class + section selected
-  const filteredStudents =
-    students.filter(
+  
+  // Filter students: first Class + Section → then Search
+  const filteredStudents = students
+    .filter(
       (s) =>
-        selectedClass &&
-        selectedSection &&
-        s.Class === selectedClass &&
-        s.Section === selectedSection
+      selectedClass &&
+      selectedSection &&
+      s.Class === selectedClass &&
+      s.Section === selectedSection
+    )
+    .filter((s) => [s.Name, s.Roll, s["Father Name"], s["Mother Name"]]
+      .join(" ")
+      .toLowerCase()
+      .includes(search.toLowerCase())
     );
-
+  
   return (
     <div className="p-6 space-y-6">
       {/* CLASS + SECTION SELECT FIRST */}
       <Card className="border border-primary/20">
         <CardContent className="flex gap-6 py-6">
-
           {/* CLASS SELECT */}
           <Select
             onValueChange={(value) => {
               setSelectedClass(value);
-              setSelectedSection(""); // reset section each time class changes
+              setSelectedSection("");
             }}
           >
             <SelectTrigger className="w-[180px]">
@@ -184,47 +190,59 @@ export default function StudentsPage() {
         </CardContent>
       </Card>
 
-      {/* ONLY SHOW TABLE AFTER selecting class + section */}
+      {/* ONLY SHOW TABLE AFTER CLASS + SECTION SELECTED */}
       {selectedClass && selectedSection ? (
         <Card className="border border-primary/20">
-          <CardHeader className="flex justify-between items-center">
+          <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <CardTitle className="text-xl">
               Students – {selectedClass}-{selectedSection}
             </CardTitle>
 
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button size="sm">Add Student</Button>
-              </DialogTrigger>
+            {/* SEARCH + ADD BUTTON */}
+            <div className="flex items-center gap-3">
+              <Input
+                placeholder="Search students..."
+                className="w-[250px]"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
 
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>{isEditing ? "Edit Student" : "Add Student"}</DialogTitle>
-                  <DialogDescription>Enter details below.</DialogDescription>
-                </DialogHeader>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="sm">Add Student</Button>
+                </DialogTrigger>
 
-                <div className="grid gap-4 py-4">
-                  {Object.keys(form).map((key) => {
-                    if (key === "id") return null;
-                    return (
-                      <div key={key}>
-                        <Label>{key}</Label>
-                        <Input
-                          value={form[key]}
-                          onChange={(e) =>
-                            setForm({ ...form, [key]: e.target.value })
-                          }
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>
+                      {isEditing ? "Edit Student" : "Add Student"}
+                    </DialogTitle>
+                    <DialogDescription>Enter details below.</DialogDescription>
+                  </DialogHeader>
 
-                <Button onClick={handleSubmit}>
-                  {isEditing ? "Update" : "Add"}
-                </Button>
-              </DialogContent>
-            </Dialog>
+                  <div className="grid gap-4 py-4">
+                    {Object.keys(form).map((key) => {
+                      if (key === "id") return null;
+                      return (
+                        <div key={key}>
+                          <Label>{key}</Label>
+                          <Input
+                            value={form[key]}
+                            onChange={(e) =>
+                              setForm({ ...form, [key]: e.target.value })
+                            }
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <Button onClick={handleSubmit}>
+                    {isEditing ? "Update" : "Add"}
+                  </Button>
+                </DialogContent>
+              </Dialog>
+            </div>
           </CardHeader>
 
           <CardContent>
@@ -249,7 +267,7 @@ export default function StudentsPage() {
                       <TableCell>{student.Section}</TableCell>
                       <TableCell>{student["Father Name"]}</TableCell>
                       <TableCell>{student["Mother Name"]}</TableCell>
-
+                      
                       <TableCell className="text-right space-x-2">
                         <Button
                           size="icon"
@@ -267,9 +285,9 @@ export default function StudentsPage() {
                           <Trash2 size={16} />
                         </Button>
                       </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
+                      </TableRow>
+               ))} 
+               </TableBody>
               </Table>
             ) : (
               <p>No students found</p>
