@@ -35,9 +35,32 @@ import data from "./data.json"
 
 
 export default function StudentsPage() {
-  const [students, setStudents] = useState(data);
-  let classes=['LKG/KG1/PP2','UKG/KG2/PP1','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII']
+  const [students, setStudents] = useState(false);
+  let classes=['LKG/KG1/PP2','UKG/KG2/PP1','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
   
+  let sections = { 
+    'LKG/KG1/PP2':['A'],
+    'UKG/KG2/PP1':['A'],
+    'I':['A'],
+    'II':['A'],
+    'III':['A'],
+    'IV':['A'],
+    'V':['A'],
+    'VI':['A','B','C','D'],
+    'VII':['A','B','C','D'],
+    'VIII':['A','B','C','D'],
+    'IX':['A','B','C','D'],
+    'X':['A','B','C'],
+    'IX':['A','B','C','D'],
+    'XII':['A','B','C','D','E','F']
+
+
+
+
+
+
+    
+  }
   const [form, setForm] = useState({ id: null, name: "", "Class": "", roll: "" });
   const [isEditing, setIsEditing] = useState(false);
   
@@ -149,6 +172,7 @@ export default function StudentsPage() {
 
         <CardContent>
           {/* STUDENT TABLE */}
+          {students ?
           <Table>
             <TableHeader>
               <TableRow>
@@ -239,6 +263,7 @@ export default function StudentsPage() {
               ))}
             </TableBody>
           </Table>
+           : 'no stdents'}
         </CardContent>
       </Card>
     </div>
