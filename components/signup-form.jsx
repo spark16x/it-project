@@ -48,7 +48,7 @@ export function SignupForm({ className, ...props}) {
   })
 });
    toast({
-     title: res.message
+     title: res.message || res.error
    })
 
   }

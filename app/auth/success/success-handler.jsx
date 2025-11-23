@@ -13,7 +13,7 @@ export default function SuccessHandler() {
     const token = params.get("token");
     
     if (token) {
-      document.cookie = `token=${token}; path=/; max-age=604800; Secure; SameSite=Lax`;
+      localStorage.setItem('user',JSON.stringify(token))
       toast({
         title: "Login is successfull"
       })
