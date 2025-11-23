@@ -33,10 +33,14 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 
-const data = {
+
+
+export function AppSidebar(props) {
+  let user =localStorage.getItem('user')
+  const data = {
   user: {
-    name: "Teacher",
-    email: "qutab@eududel.lite",
+    name: user.name || 'Teacher',
+    email: user.email || 'qutub@edudel.lite',
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
@@ -124,7 +128,6 @@ const data = {
   ],
 }
 
-export function AppSidebar(props) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
