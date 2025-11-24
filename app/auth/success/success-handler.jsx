@@ -13,7 +13,7 @@ export default function SuccessHandler() {
     const token = params.get("token");
     
     if (token) {
-      localStorage.setItem('user',JSON.stringify(token))
+      localStorage.setItem('user',token)
       toast({
         title: "Login is successfull"
       })
