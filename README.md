@@ -1,1 +1,1 @@
-[Edudel.lite](https://edudel-lite.vercel.app)
+[Edudel.lite](https://edudel-lite.vercel.app).
