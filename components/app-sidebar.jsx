@@ -3,23 +3,16 @@
 import * as React from "react"
 import {
   IconCamera,
-  IconChartBar,
   IconDashboard,
-  IconDatabase,
+  IconUsers,
   IconFileAi,
   IconFileDescription,
-  IconFileWord,
-  IconFolder,
   IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
   IconSearch,
   IconSettings,
-  IconUsers,
+  IconInnerShadowTop,
 } from "@tabler/icons-react"
 
-import { NavDocuments } from '@/components/nav-documents'
 import { NavMain } from '@/components/nav-main'
 import { NavSecondary } from '@/components/nav-secondary'
 import { NavUser } from '@/components/nav-user'
@@ -32,111 +25,72 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-
-
+import { useEffect, useState } from "react";
 
 export function AppSidebar(props) {
-  let user =localStorage.getItem('user')
-  const data = {
-  user: {
-    name: user.name || 'Teacher',
-    email: user.email || 'qutub@edudel.lite',
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: IconDashboard,
-    },
-    {
-      title: "Attendeces",
-      url: "/dashboard/attendance",
-      icon: IconUsers,
-    },
-    {
-      title: "Students",
-      url: "/dashboard/students",
-      icon: IconUsers,
-    },
-    
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    let storedUser = localStorage.getItem("user")
+    let user = {}
+
+    try {
+      user = JSON.parse(storedUser) || {}
+    } catch {
+      user = {}
+    }
+
+    setData({
+      user: {
+        name: user?.name || "Teacher",
+        email: user?.email || "qutub@edudel.lite",
+        avatar: "/avatars/shadcn.jpg",
+      },
+      navMain: [
         {
-          title: "Active Proposals",
-          url: "#",
+          title: "Dashboard",
+          url: "/dashboard",
+          icon: IconDashboard,
         },
         {
-          title: "Archived",
-          url: "#",
+          title: "Attendeces",
+          url: "/dashboard/attendance",
+          icon: IconUsers,
+        },
+        {
+          title: "Students",
+          url: "/dashboard/students",
+          icon: IconUsers,
         },
       ],
-    },
-    {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
-      items: [
+      navSecondary: [
         {
-          title: "Active Proposals",
+          title: "Settings",
           url: "#",
+          icon: IconSettings,
         },
         {
-          title: "Archived",
+          title: "Get Help",
           url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
+          icon: IconHelp,
         },
         {
-          title: "Archived",
+          title: "Search",
           url: "#",
+          icon: IconSearch,
         },
       ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-      icon: IconSettings,
-    },
-    {
-      title: "Get Help",
-      url: "#",
-      icon: IconHelp,
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
-    },
-  ],
-}
+    })
+  }, [])
+
+  if (!data) return null
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
+            <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="#">
                 <IconInnerShadowTop className="!size-5" />
                 <span className="text-base font-semibold">Edudel.lite</span>
@@ -145,10 +99,12 @@ export function AppSidebar(props) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
+
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
