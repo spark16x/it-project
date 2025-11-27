@@ -44,7 +44,7 @@ export function AppSidebar(props) {
       user: {
         name: user?.name || "Teacher",
         email: user?.email || "qutub@edudel.lite",
-        avatar: "/avatars/shadcn.jpg",
+        avatar: user?.picture || "/avatars/shadcn.jpg",
       },
       navMain: [
         {
