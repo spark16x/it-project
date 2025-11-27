@@ -1,3 +1,4 @@
+'use client';
 import { AppSidebar } from '@/components/app-sidebar'
 import { ChartAreaInteractive } from '@/components/chart-area-interactive'
 import { DataTable } from '@/components/data-table'
@@ -7,11 +8,18 @@ import {
   SidebarInset,
   SidebarProvider,
 } from '@/components/ui/sidebar'
+import SigninBtn from '@/components/SigninBtn.jsx';
+import { useEffect, useState } from "react";
 
 export default function RootLayout({ children }) {
-  return (
+  const [user, setUser] = useState(false)
+  useEffect(() => {
+    let user = localStorage.getItem("user");
+    setUser(!!user)
     
-     <SidebarProvider
+  })
+  return (
+    user ? <SidebarProvider
       style={
         {
           "--sidebar-width": "calc(var(--spacing) * 72)",
@@ -30,7 +38,6 @@ export default function RootLayout({ children }) {
           </div>
         </div>
       </SidebarInset>
-    </SidebarProvider>
-    
+    </SidebarProvider> : <SigninBtn/>
   );
 }
