@@ -14,8 +14,8 @@ import { useEffect, useState } from "react";
 export default function RootLayout({ children }) {
   const [user, setUser] = useState(false)
   useEffect(() => {
-    let user = localStorage.getItem("user");
-    setUser(!!user)
+    let user = Boolean(localStorage.getItem("user")) ;
+    setUser(user)
     
   })
   return (
