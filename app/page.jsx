@@ -134,10 +134,10 @@ export default function Home() {
             <div className="mt-6 flex items-center gap-4">
               <Avatar>
                 <AvatarImage src="/avatars/teacher.jpg" alt="Head Teacher" />
-                <AvatarFallback>TM</AvatarFallback>
+                <AvatarFallback>AP</AvatarFallback>
               </Avatar>
               <div>
-                <div className="text-sm font-medium">Ms. Tripti Mehra</div>
+                <div className="text-sm font-medium">Mr. Anmit Pandaya</div>
                 <div className="text-xs text-slate-400">Principal, Quthub Mehruali School</div>
               </div>
             </div>
