@@ -40,29 +40,44 @@ export function AppSidebar(props) {
       user = {}
     }
 
+    const role = user?.role || "Teacher"
+
+    // base nav
+    const navMainItems = [
+      {
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: IconDashboard,
+      },
+      {
+        title: "Attendeces",
+        url: "/dashboard/attendance",
+        icon: IconUsers,
+      },
+      {
+        title: "Students",
+        url: "/dashboard/students",
+        icon: IconUsers,
+      },
+    ]
+
+    // 👉 If user is Principal, add Teachers tab
+    if (role === "Principal") {
+      navMainItems.push({
+        title: "Teachers",
+        url: "/dashboard/teachers",
+        icon: IconUsers,
+      })
+    }
+
     setData({
       user: {
         name: user?.name || "Teacher",
         email: user?.email || "qutub@edudel.lite",
         avatar: user?.picture || "/avatars/shadcn.jpg",
+        role,
       },
-      navMain: [
-        {
-          title: "Dashboard",
-          url: "/dashboard",
-          icon: IconDashboard,
-        },
-        {
-          title: "Attendeces",
-          url: "/dashboard/attendance",
-          icon: IconUsers,
-        },
-        {
-          title: "Students",
-          url: "/dashboard/students",
-          icon: IconUsers,
-        },
-      ],
+      navMain: navMainItems,
       navSecondary: [
         {
           title: "Settings",
