@@ -59,7 +59,7 @@ export default function TeachersPage() {
       <Separator className="bg-neutral-700 mb-4" />
 
       {/* Teachers List */}
-      <ScrollArea className="h-[70vh] pr-3">
+      <ScrollArea className="h-[70vh] pr-3 bg-primary">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {teachers.map((t, index) => (
             <Card

@@ -12,6 +12,8 @@ import { Badge } from "@/components/ui/badge";
 
 // Icons (lucide-react commonly used with shadcn)
 import { IconSchool, IconUsers, IconBook, IconCalendar } from "@tabler/icons-react";
+import Link from "next/link";
+
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -98,9 +100,9 @@ export default function Home() {
         </div>
 
         <nav className="flex items-center gap-3">
-          <Button variant="ghost" className="hidden sm:inline">Dashboard</Button>
-          <Button variant="ghost" className="hidden sm:inline">Students</Button>
-          <Button variant="ghost">Login</Button>
+          <Button variant="ghost" className="hidden sm:inline"><Link href="/dashboard">Dashboard</Link></Button>
+          <Button variant="ghost" className="hidden sm:inline"><Link href="/dashboard/students">Students</Link></Button>
+          <Button variant="ghost"><Link href="/login">Login</Link></Button>
         </nav>
       </header>
 
@@ -113,7 +115,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="text-4xl md:text-5xl font-extrabold leading-tight"
             >
-              Edudel.lite — School management for <span className="text-cyan-400">Quthub Mehruali</span>
+              Edudel.lite — School management for <span className="text-primary-foreground">Quthub Mehruali</span>
             </motion.h1>
 
             <motion.p
@@ -127,7 +129,7 @@ export default function Home() {
             </motion.p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button>Get Started</Button>
+              <Button><Link href="/signup">Get Started</Link></Button>
               <Button variant="outline">Request Demo</Button>
             </div>
 
