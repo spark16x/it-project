@@ -29,7 +29,6 @@ export default function RootLayout({ children }) {
         >
           <SplashScreen />
           {/* client component handles pathname + hiding nav */}
-          <ClientNavWrapper />
           {children}
           <Toaster />
         </ThemeProvider>
