@@ -115,7 +115,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="text-4xl md:text-5xl font-extrabold leading-tight"
             >
-              Edudel.lite — School management for <span className="text-primary">Quthub Mehruali</span>
+              Edudel.lite — School management for <span className="text-cyan-400">Quthub Mehruali</span>
             </motion.h1>
 
             <motion.p
