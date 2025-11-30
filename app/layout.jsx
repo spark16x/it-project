@@ -36,8 +36,6 @@ export default function RootLayout({ children }) {
             crawl={true}
             easing="ease"
             speed={200}
-            template='<div class="bar" role="bar"><div class="peg"></div></div> 
-              <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
             zIndex={1600}
             showAtBottom={false}
                 />
