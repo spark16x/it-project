@@ -70,7 +70,8 @@
     "zod": "3.25.76",
     "gsap":"3.13.0",
     "@gsap/react":"2.1.2",
-    "framer-motion":"12.23.24"
+    "framer-motion":"12.23.24",
+    "nextjs-toploader":"^3.9.17"
     
   },
   "devDependencies": {
