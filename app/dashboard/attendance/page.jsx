@@ -40,7 +40,7 @@ export default function AttendancePage() {
   };
 
   return (
-    <div className="items-center justify-center" >
+    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 items-center justify-center" >
             <Card className="w-full max-w-3xl  shadow-xl border-neutral-700">
         <CardHeader>
           <CardTitle className="text-xl text-primary-foreground">Student Attendance</CardTitle>

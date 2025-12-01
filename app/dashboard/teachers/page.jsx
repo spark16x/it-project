@@ -39,7 +39,7 @@ export default function TeachersPage() {
   ];
 
   return (
-    <div className="items-center justify-center">{
+    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 items-center justify-center">{
       teachers.map((teacher)=>{
         <Card className="w-full max-w-3xl  shadow-xl border-neutral-700">
          <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
