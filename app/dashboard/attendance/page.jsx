@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -39,9 +39,6 @@ export default function AttendancePage() {
   const [selectedClass, setSelectedClass] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
 
-  const [visibleCount, setVisibleCount] = useState(20);
-  const loadMoreRef = useRef(null);
-
   const [dialogOpen, setDialogOpen] = useState(false);
   const [summary, setSummary] = useState({
     total: 0,
@@ -51,12 +48,10 @@ export default function AttendancePage() {
     others: 0,
   });
 
-  // Load and format data
   useEffect(() => {
     const updated = data.map((student, index) => ({
       ...student,
       status: "present",
-      roll: index + 1,
       id: index,
     }));
     setStudents(updated);
@@ -102,8 +97,8 @@ export default function AttendancePage() {
     );
   };
 
-  // Filter students by Class + Section
-  const filteredStudents = students.filter(
+  // 🔥 Filter Students by Class & Section
+  let filteredStudents = students.filter(
     (s) =>
       selectedClass &&
       selectedSection &&
@@ -111,25 +106,12 @@ export default function AttendancePage() {
       s.Section === selectedSection
   );
 
-  // Visible students for infinite scroll
-  const visibleStudents = filteredStudents.slice(0, visibleCount);
+  // 🔥 Assign new roll numbers after filtering
+  filteredStudents = filteredStudents.map((s, index) => ({
+    ...s,
+    roll: index + 1,
+  }));
 
-  // Infinite Scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setVisibleCount((prev) => prev + 20);
-        }
-      },
-      { threshold: 1 }
-    );
-
-    if (loadMoreRef.current) observer.observe(loadMoreRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  // Final Submit
   const handleSubmit = () => {
     const present = filteredStudents.filter((s) => s.status === "present").length;
     const absent = filteredStudents.filter((s) => s.status === "absent").length;
@@ -151,11 +133,11 @@ export default function AttendancePage() {
     <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 items-center justify-center">
       <Card className="border border-primary/20">
         <CardContent className="flex gap-6 py-6">
+          {/* CLASS SELECT */}
           <Select
             onValueChange={(value) => {
               setSelectedClass(value);
               setSelectedSection("");
-              setVisibleCount(20);
             }}
           >
             <SelectTrigger className="w-[180px]">
@@ -173,12 +155,10 @@ export default function AttendancePage() {
             </SelectContent>
           </Select>
 
+          {/* SECTION SELECT */}
           <Select
             disabled={!selectedClass}
-            onValueChange={(value) => {
-              setSelectedSection(value);
-              setVisibleCount(20);
-            }}
+            onValueChange={(value) => setSelectedSection(value)}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select Section" />
@@ -221,7 +201,7 @@ export default function AttendancePage() {
                 </TableHeader>
 
                 <TableBody>
-                  {visibleStudents.map((stu) => (
+                  {filteredStudents.map((stu) => (
                     <TableRow key={stu.id} className="border-neutral-800">
                       <TableCell>{stu.roll}</TableCell>
                       <TableCell>{stu.Name}</TableCell>
@@ -230,6 +210,7 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "present"}
                           onCheckedChange={() => changeStatus(stu.id, "present")}
+                          className="data-[state=checked]:border-green-500 data-[state=checked]:bg-green-500 "
                         />
                       </TableCell>
 
@@ -237,6 +218,7 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "absent"}
                           onCheckedChange={() => changeStatus(stu.id, "absent")}
+                          className="data-[state=checked]:border-red-500 data-[state=checked]:bg-red-500 "
                         />
                       </TableCell>
 
@@ -244,6 +226,7 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "leave"}
                           onCheckedChange={() => changeStatus(stu.id, "leave")}
+                          className="data-[state=checked]:border-orange-500 data-[state=checked]:bg-orange-500 "
                         />
                       </TableCell>
 
@@ -251,15 +234,13 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "others"}
                           onCheckedChange={() => changeStatus(stu.id, "others")}
+                          className="data-[state=checked]:border-gray-500 data-[state=checked]:bg-gray-500 "
                         />
                       </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
-
-              {/* Infinite scroll trigger */}
-              <div ref={loadMoreRef} className="h-10"></div>
 
               <div className="mt-6 flex justify-end">
                 <Button
@@ -278,27 +259,17 @@ export default function AttendancePage() {
         </p>
       )}
 
-      {/* SUMMARY POPUP */}
+      {/* POPUP */}
       <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Attendance Summary</AlertDialogTitle>
             <AlertDialogDescription className="space-y-2">
-              <p>
-                <strong>Total:</strong> {summary.total}
-              </p>
-              <p className="text-green-500">
-                <strong>Present:</strong> {summary.present}
-              </p>
-              <p className="text-red-500">
-                <strong>Absent:</strong> {summary.absent}
-              </p>
-              <p className="text-orange-500">
-                <strong>Leave:</strong> {summary.leave}
-              </p>
-              <p className="text-gray-400">
-                <strong>Others:</strong> {summary.others}
-              </p>
+              <p><strong>Total:</strong> {summary.total}</p>
+              <p className="text-green-500"><strong>Present:</strong> {summary.present}</p>
+              <p className="text-red-500"><strong>Absent:</strong> {summary.absent}</p>
+              <p className="text-orange-500"><strong>Leave:</strong> {summary.leave}</p>
+              <p className="text-gray-400"><strong>Others:</strong> {summary.others}</p>
             </AlertDialogDescription>
           </AlertDialogHeader>
 
