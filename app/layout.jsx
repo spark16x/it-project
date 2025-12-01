@@ -34,6 +34,7 @@ export default function RootLayout({ children }) {
             crawlSpeed={200}
             height={3}
             crawl={true}
+            showSpinner={false}
             easing="ease"
             speed={200}
             zIndex={1600}
