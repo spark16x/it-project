@@ -9,7 +9,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { IconSearch, IconUser } from "@tabler/icons-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function TeachersPage() {
   const teachers = [
