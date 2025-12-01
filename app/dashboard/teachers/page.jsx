@@ -3,12 +3,8 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { IconSearch, IconUser } from "@tabler/icons-react";
 
 export default function TeachersPage() {
   const teachers = [
@@ -39,18 +35,42 @@ export default function TeachersPage() {
   ];
 
   return (
-    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 items-center justify-center">{
-      teachers.map((teacher)=>{
-        <Card className="w-full max-w-3xl  shadow-xl border-neutral-700">
-         <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <CardTitle className="text-xl">
-             {teacher.name}
-            </CardTitle>
-            </CardHeader>
-      </Card>
-      })
-    }
-      
+    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 items-center justify-center">
+      {teachers.map((teacher, index) => (
+        <Card
+          key={index}
+          className="w-full max-w-3xl shadow-xl border-neutral-700"
+        >
+          <CardHeader className="flex flex-row items-center gap-4">
+            <Avatar className="h-14 w-14">
+              <AvatarImage src={teacher.image} alt={teacher.name} />
+              <AvatarFallback>
+                {teacher.name.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+
+            <div className="flex flex-col">
+              <CardTitle className="text-lg font-semibold">
+                {teacher.name}
+              </CardTitle>
+
+              <p className="text-sm text-muted-foreground">
+                {teacher.subject}
+              </p>
+
+              <Badge
+                className={`mt-2 w-fit ${
+                  teacher.status === "Active"
+                    ? "bg-green-600"
+                    : "bg-yellow-600"
+                }`}
+              >
+                {teacher.status}
+              </Badge>
+            </div>
+          </CardHeader>
+        </Card>
+      ))}
     </div>
   );
 }

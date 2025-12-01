@@ -75,7 +75,7 @@ export function LoginForm({ className, ...props }) {
       // - or call /api/set-cookie to make httpOnly cookies
 
       // example: localStorage (simple for now)
-      if (data.token) {
+      if (data.user) {
         localStorage.setItem("user", data.user)
       }
 
