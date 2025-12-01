@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
 import data from "./data.json";
 
 import {
@@ -39,7 +38,10 @@ export default function AttendancePage() {
   const [students, setStudents] = useState([]);
   const [selectedClass, setSelectedClass] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
+
+  // Infinite Scroll States
   const [visibleCount, setVisibleCount] = useState(20);
+  const loadMoreRef = useRef(null);
 
   // POPUP STATES
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -52,9 +54,10 @@ export default function AttendancePage() {
   });
 
   useEffect(() => {
-    const updated = data.map((student) => ({
+    const updated = data.map((student,index) => ({
       ...student,
       status: "present",
+      roll:index,
     }));
     setStudents(updated);
   }, []);
@@ -99,7 +102,21 @@ export default function AttendancePage() {
     );
   };
 
-  const { toast } = useToast();
+  // 🔥 Infinite Scroll Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((prev) => prev + 20);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (loadMoreRef.current) observer.observe(loadMoreRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = () => {
     const present = students.filter((s) => s.status === "present").length;
@@ -118,12 +135,12 @@ export default function AttendancePage() {
     setDialogOpen(true);
   };
 
+  const visibleStudents = students.slice(0, visibleCount);
+
   return (
     <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 items-center justify-center">
-      {/* TOP SELECT BOXES */}
       <Card className="border border-primary/20">
         <CardContent className="flex gap-6 py-6">
-          {/* CLASS SELECT */}
           <Select
             onValueChange={(value) => {
               setSelectedClass(value);
@@ -146,7 +163,6 @@ export default function AttendancePage() {
             </SelectContent>
           </Select>
 
-          {/* SECTION SELECT */}
           <Select
             disabled={!selectedClass}
             onValueChange={(value) => {
@@ -172,9 +188,8 @@ export default function AttendancePage() {
         </CardContent>
       </Card>
 
-      {/* STUDENT TABLE */}
       {selectedClass && selectedSection ? (
-        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 items-center justify-center">
+        <div className="flex flex-col gap-4 py-4 items-center justify-center">
           <Card className="w-full max-w-3xl shadow-xl border-neutral-700">
             <CardHeader>
               <CardTitle className="text-xl text-primary-foreground">
@@ -196,7 +211,7 @@ export default function AttendancePage() {
                 </TableHeader>
 
                 <TableBody>
-                  {students.map((stu) => (
+                  {visibleStudents.map((stu) => (
                     <TableRow key={stu.id} className="border-neutral-800">
                       <TableCell>{stu.roll}</TableCell>
                       <TableCell>{stu.name}</TableCell>
@@ -207,7 +222,6 @@ export default function AttendancePage() {
                           onCheckedChange={() =>
                             changeStatus(stu.id, "present")
                           }
-                          className="data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600"
                         />
                       </TableCell>
 
@@ -217,7 +231,6 @@ export default function AttendancePage() {
                           onCheckedChange={() =>
                             changeStatus(stu.id, "absent")
                           }
-                          className="data-[state=checked]:border-red-600 data-[state=checked]:bg-red-600"
                         />
                       </TableCell>
 
@@ -225,7 +238,6 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "leave"}
                           onCheckedChange={() => changeStatus(stu.id, "leave")}
-                          className="data-[state=checked]:border-orange-600 data-[state=checked]:bg-orange-600"
                         />
                       </TableCell>
 
@@ -233,13 +245,15 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "others"}
                           onCheckedChange={() => changeStatus(stu.id, "others")}
-                          className="data-[state=checked]:border-gray-500 data-[state=checked]:bg-gray-500"
                         />
                       </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
+
+              {/* Infinite Scroll Trigger */}
+              <div ref={loadMoreRef} className="h-10"></div>
 
               <div className="mt-6 flex justify-end">
                 <Button
@@ -260,15 +274,12 @@ export default function AttendancePage() {
 
       {/* SUMMARY POPUP */}
       <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <AlertDialogContent className="border border-neutral-700">
+        <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-xl">
-              Attendance Summary
-            </AlertDialogTitle>
-
+            <AlertDialogTitle>Attendance Summary</AlertDialogTitle>
             <AlertDialogDescription className="space-y-2">
               <p>
-                <strong>Total Students:</strong> {summary.total}
+                <strong>Total:</strong> {summary.total}
               </p>
               <p className="text-green-500">
                 <strong>Present:</strong> {summary.present}
