@@ -28,7 +28,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
-import { useRouter } from "next/navigation"
+import { useRouter } from "nextjs-toploader/app"
 
 export function NavUser({ user }) {
   const { isMobile } = useSidebar()

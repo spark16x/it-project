@@ -11,20 +11,20 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import Link from "next/link"
-import { redirect } from 'next/navigation'
+import { useRouter } from 'nextjs-toploader/app'
 import { useState } from "react";
 
 
 export function NavMain({ items }) {
-  const [openedTab ,setOpenedTab] = useState('Dashboard')
-
+  const [openedTab, setOpenedTab] = useState('Dashboard')
+  const router = useRouter()
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}  onClick={()=>{
-            redirect(item.url) 
+            router.push(item.url) 
             setOpenedTab(item.title)  
             }} className={openedTab !== item.title && "bg-[calc(var(--background)/10)]"}>
               <SidebarMenuButton tooltip={item.title}>
