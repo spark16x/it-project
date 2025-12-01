@@ -119,7 +119,7 @@ export default function AttendancePage() {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 items-center justify-center">
       {/* TOP SELECT BOXES */}
       <Card className="border border-primary/20">
         <CardContent className="flex gap-6 py-6">
@@ -292,6 +292,6 @@ export default function AttendancePage() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </>
+    </div>
   );
 }
