@@ -39,11 +39,9 @@ export default function AttendancePage() {
   const [selectedClass, setSelectedClass] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
 
-  // Infinite Scroll States
   const [visibleCount, setVisibleCount] = useState(20);
   const loadMoreRef = useRef(null);
 
-  // POPUP STATES
   const [dialogOpen, setDialogOpen] = useState(false);
   const [summary, setSummary] = useState({
     total: 0,
@@ -53,11 +51,13 @@ export default function AttendancePage() {
     others: 0,
   });
 
+  // Load and format data
   useEffect(() => {
-    const updated = data.map((student,index) => ({
+    const updated = data.map((student, index) => ({
       ...student,
       status: "present",
-      roll:index,
+      roll: index + 1,
+      id: index,
     }));
     setStudents(updated);
   }, []);
@@ -102,7 +102,19 @@ export default function AttendancePage() {
     );
   };
 
-  // 🔥 Infinite Scroll Observer
+  // Filter students by Class + Section
+  const filteredStudents = students.filter(
+    (s) =>
+      selectedClass &&
+      selectedSection &&
+      s.Class === selectedClass &&
+      s.Section === selectedSection
+  );
+
+  // Visible students for infinite scroll
+  const visibleStudents = filteredStudents.slice(0, visibleCount);
+
+  // Infinite Scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -114,18 +126,18 @@ export default function AttendancePage() {
     );
 
     if (loadMoreRef.current) observer.observe(loadMoreRef.current);
-
     return () => observer.disconnect();
   }, []);
 
+  // Final Submit
   const handleSubmit = () => {
-    const present = students.filter((s) => s.status === "present").length;
-    const absent = students.filter((s) => s.status === "absent").length;
-    const leave = students.filter((s) => s.status === "leave").length;
-    const others = students.filter((s) => s.status === "others").length;
+    const present = filteredStudents.filter((s) => s.status === "present").length;
+    const absent = filteredStudents.filter((s) => s.status === "absent").length;
+    const leave = filteredStudents.filter((s) => s.status === "leave").length;
+    const others = filteredStudents.filter((s) => s.status === "others").length;
 
     setSummary({
-      total: students.length,
+      total: filteredStudents.length,
       present,
       absent,
       leave,
@@ -134,8 +146,6 @@ export default function AttendancePage() {
 
     setDialogOpen(true);
   };
-
-  const visibleStudents = students.slice(0, visibleCount);
 
   return (
     <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 items-center justify-center">
@@ -214,23 +224,19 @@ export default function AttendancePage() {
                   {visibleStudents.map((stu) => (
                     <TableRow key={stu.id} className="border-neutral-800">
                       <TableCell>{stu.roll}</TableCell>
-                      <TableCell>{stu.name}</TableCell>
+                      <TableCell>{stu.Name}</TableCell>
 
                       <TableCell>
                         <Checkbox
                           checked={stu.status === "present"}
-                          onCheckedChange={() =>
-                            changeStatus(stu.id, "present")
-                          }
+                          onCheckedChange={() => changeStatus(stu.id, "present")}
                         />
                       </TableCell>
 
                       <TableCell>
                         <Checkbox
                           checked={stu.status === "absent"}
-                          onCheckedChange={() =>
-                            changeStatus(stu.id, "absent")
-                          }
+                          onCheckedChange={() => changeStatus(stu.id, "absent")}
                         />
                       </TableCell>
 
@@ -252,7 +258,7 @@ export default function AttendancePage() {
                 </TableBody>
               </Table>
 
-              {/* Infinite Scroll Trigger */}
+              {/* Infinite scroll trigger */}
               <div ref={loadMoreRef} className="h-10"></div>
 
               <div className="mt-6 flex justify-end">
