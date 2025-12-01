@@ -18,7 +18,7 @@ export default function SuccessHandler() {
       toast({
         title: "Login is successfull"
       })
-      router.replace("/dashboard");
+      router.push("/dashboard");
     }
   }, [params, router]);
   
