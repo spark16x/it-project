@@ -58,10 +58,9 @@ export default function SettingsPage() {
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="student">Student</SelectItem>
-                  <SelectItem value="developer">Developer</SelectItem>
-                  <SelectItem value="designer">Designer</SelectItem>
-                  <SelectItem value="admin">Admin</SelectItem>
+                  <SelectItem value="Student">Student</SelectItem>
+                  <SelectItem value="Teacher">Teacher</SelectItem>
+                  <SelectItem value="Principal">Principal</SelectItem>
                 </SelectContent>
               </Select>
             </div>
