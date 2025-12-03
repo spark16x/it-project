@@ -121,7 +121,7 @@ export default function Home() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay:5 }}
               className="mt-4 text-slate-300 max-w-xl"
             >
               A lightweight, fast admin panel for teachers, students and parents — attendance, grades, library, and
@@ -139,7 +139,7 @@ export default function Home() {
                 <AvatarFallback>AP</AvatarFallback>
               </Avatar>
               <div>
-                <div className="text-sm font-medium">Mr. Anmit Pandaya</div>
+                <div className="text-sm font-medium">Mr. Amit Pandaya</div>
                 <div className="text-xs text-slate-400">Principal, Quthub Mehruali School</div>
               </div>
             </div>

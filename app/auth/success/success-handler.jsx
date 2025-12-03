@@ -18,9 +18,10 @@ export default function SuccessHandler() {
       toast({
         title: "Login is successfull"
       })
+      
       router.push("/dashboard");
     }
-  }, [params, router]);
+  }, [params]);
   
   return <p>Logging you in…</p>;
 }

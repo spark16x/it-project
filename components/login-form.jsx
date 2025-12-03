@@ -76,7 +76,7 @@ export function LoginForm({ className, ...props }) {
 
       // example: localStorage (simple for now)
       if (data.user) {
-        localStorage.setItem("user", data.user)
+        localStorage.setItem("user", JSON.stringify(data.user))
       }
 
       toast({

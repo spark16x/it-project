@@ -180,7 +180,7 @@ export default function AttendancePage() {
 
       {selectedClass && selectedSection ? (
         <div className="flex flex-col gap-4 py-4 items-center justify-center">
-          <Card className="w-full max-w-3xl shadow-xl border-neutral-700">
+          <Card className=" shadow-xl border-neutral-700">
             <CardHeader>
               <CardTitle className="text-xl text-primary-foreground">
                 Student Attendance
@@ -210,7 +210,7 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "present"}
                           onCheckedChange={() => changeStatus(stu.id, "present")}
-                          className="data-[state=checked]:border-green-500 data-[state=checked]:bg-green-500 "
+                          className="data-[state=checked]:border-green-500 data-[state=checked]:bg-green-500 dark:data-[state=checked]:border-green-500 dark:data-[state=checked]:bg-green-500 "
                         />
                       </TableCell>
 
@@ -218,7 +218,7 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "absent"}
                           onCheckedChange={() => changeStatus(stu.id, "absent")}
-                          className="data-[state=checked]:border-red-500 data-[state=checked]:bg-red-500 "
+                          className="data-[state=checked]:border-red-500 data-[state=checked]:bg-red-500 dark:data-[state=checked]:border-red-500 dark:data-[state=checked]:bg-red-500"
                         />
                       </TableCell>
 
@@ -226,7 +226,7 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "leave"}
                           onCheckedChange={() => changeStatus(stu.id, "leave")}
-                          className="data-[state=checked]:border-orange-500 data-[state=checked]:bg-orange-500 "
+                          className="data-[state=checked]:border-orange-500 data-[state=checked]:bg-orange-500 dark:data-[state=checked]:border-orange-500 dark:data-[state=checked]:bg-orange-500"
                         />
                       </TableCell>
 
@@ -234,7 +234,7 @@ export default function AttendancePage() {
                         <Checkbox
                           checked={stu.status === "others"}
                           onCheckedChange={() => changeStatus(stu.id, "others")}
-                          className="data-[state=checked]:border-gray-500 data-[state=checked]:bg-gray-500 "
+                          className="data-[state=checked]:border-gray-500 data-[state=checked]:bg-gray-500 dark:data-[state=checked]:border-gray-500 dark:data-[state=checked]:bg-gray-500 "
                         />
                       </TableCell>
                     </TableRow>

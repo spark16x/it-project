@@ -17,7 +17,7 @@ export function SiteHeader() {
       setName("Attendance");
     } else if (pathname === "/dashboard/students") {
       setName("Students");
-    } else if (pathname === "dashboard/teachers") {
+    } else if (pathname === "/dashboard/teachers") {
       setName("Teachers");
     } else {
       setName(""); // fallback
