@@ -12,7 +12,7 @@ import { useTheme } from "next-themes"
 export default function SettingsPage() {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("student");
-  const { setTheme } = useTheme()
+  const { theme,setTheme } = useTheme()
   const [avatar, setAvatar] = useState("/avatar-placeholder.png");
   
   useEffect(() => {
