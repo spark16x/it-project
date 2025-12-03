@@ -81,7 +81,7 @@ export function AppSidebar(props) {
       navSecondary: [
         {
           title: "Settings",
-          url: "#",
+          url: "/dashboard/settings",
           icon: IconSettings,
         },
         {
