@@ -29,38 +29,42 @@ import { useEffect, useState } from "react";
 
 export function AppSidebar(props) {
   const [data, setData] = useState(null)
-
+  
   useEffect(() => {
     let storedUser = localStorage.getItem("user")
     let user = {}
-
+    
     try {
       user = JSON.parse(storedUser) || {}
     } catch {
       user = {}
     }
-
+    
     const role = user?.role || "Teacher"
-
+    
     // base nav
     const navMainItems = [
-      {
-        title: "Dashboard",
-        url: "/dashboard",
-        icon: IconDashboard,
-      },
-      {
-        title: "Attendeces",
-        url: "/dashboard/attendance",
-        icon: IconUsers,
-      },
-      {
-        title: "Students",
-        url: "/dashboard/students",
-        icon: IconUsers,
-      },
-    ]
-
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: IconDashboard,
+    },
+    {
+      title: "Attendeces",
+      url: "/dashboard/attendance",
+      icon: IconUsers,
+    },
+    {
+      title: "Students",
+      url: "/dashboard/students",
+      icon: IconUsers,
+    },
+    {
+      title: "Time Table",
+      url: "/dashboard/tt",
+      icon: IconUsers,
+    }]
+    
     // 👉 If user is Principal, add Teachers tab
     if (role === "Principal") {
       navMainItems.push({
@@ -69,7 +73,7 @@ export function AppSidebar(props) {
         icon: IconUsers,
       })
     }
-
+    
     setData({
       user: {
         name: user?.name || "Teacher",
@@ -79,27 +83,26 @@ export function AppSidebar(props) {
       },
       navMain: navMainItems,
       navSecondary: [
-        {
-          title: "Settings",
-          url: "/dashboard/settings",
-          icon: IconSettings,
-        },
-        {
-          title: "Get Help",
-          url: "#",
-          icon: IconHelp,
-        },
-        {
-          title: "Search",
-          url: "#",
-          icon: IconSearch,
-        },
-      ],
+      {
+        title: "Settings",
+        url: "/dashboard/settings",
+        icon: IconSettings,
+      },
+      {
+        title: "Get Help",
+        url: "#",
+        icon: IconHelp,
+      },
+      {
+        title: "Search",
+        url: "#",
+        icon: IconSearch,
+      }, ],
     })
   }, [])
-
+  
   if (!data) return null
-
+  
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
