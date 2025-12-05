@@ -12,7 +12,7 @@ import {
   IconSettings,
   IconInnerShadowTop,
 } from "@tabler/icons-react"
-
+import { Table } from 'lucide-react';
 import { NavMain } from '@/components/nav-main'
 import { NavSecondary } from '@/components/nav-secondary'
 import { NavUser } from '@/components/nav-user'
@@ -62,7 +62,7 @@ export function AppSidebar(props) {
     {
       title: "Time Table",
       url: "/dashboard/tt",
-      icon: IconUsers,
+      icon: Table,
     }]
     
     // 👉 If user is Principal, add Teachers tab
