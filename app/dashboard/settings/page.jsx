@@ -8,8 +8,16 @@ import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useTheme } from "next-themes"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/components/ui/avatar'
+import { useRouter } from "nextjs-toploader/app"
+
 
 export default function SettingsPage() {
+  const router = useRouter()
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("student");
   const { theme, setTheme } = useTheme();
@@ -45,7 +53,7 @@ export default function SettingsPage() {
   // Logout
   const handleLogout = () => {
     localStorage.removeItem("user");
-    window.location.href = "/login";
+    router.push('/login')
   };
   
   return (
