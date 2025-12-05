@@ -104,7 +104,7 @@ export default function SettingsPage() {
           {/* Right Side */}
           <div className="flex flex-col items-center gap-6">
             <div className="flex flex-col items-center gap-2">
-                <Avatar className="object-cver rounded-lg grayscale">
+                <Avatar className="w-[50px] rounded-lg grayscale">
                   <AvatarImage src={avatar || "/placeholder.svg"} />
                   <AvatarFallback className="rounded-lg">T</AvatarFallback>
               </Avatar>
