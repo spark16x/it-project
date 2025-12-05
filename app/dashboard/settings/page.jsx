@@ -78,7 +78,7 @@ export default function SettingsPage() {
 
             <div>
               <Label>Role</Label>
-              <Select value={role} onValueChange={setRole}>
+              <Select value={role} onValueChange={setRole} disabled>
                 <SelectTrigger>
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
