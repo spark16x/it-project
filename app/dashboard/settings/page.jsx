@@ -1,5 +1,5 @@
 'use client'
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -12,25 +12,42 @@ import { useTheme } from "next-themes"
 export default function SettingsPage() {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("student");
-  const { theme,setTheme } = useTheme()
-  const [avatar, setAvatar] = useState("/avatar-placeholder.png");
-  
+  const { theme, setTheme } = useTheme();
+  const [avatar, setAvatar] = useState(
+    "https://lh3.googleusercontent.com/a/ACg8ocLr_DUapNEjmKjJcMn0kyhRxojtczcMsDl_fO2wQ9WIzDBul-MN=s96-c"
+  );
+
+  // ✅ FIXED useEffect — prevents infinite re-renders
   useEffect(() => {
     let user = localStorage.getItem("user");
-    user = JSON.parse(user)
-    setEmail(user.email);
-    setRole(user.role);
-    setAvatar(user.picture)
-    
-  })
+    if (!user) return;
+
+    try {
+      user = JSON.parse(user);
+      setEmail(user.email || "");
+      setRole(user.role || "student");
+      setAvatar(user.picture || avatar);
+    } catch (err) {
+      console.error("Invalid user object", err);
+    }
+  }, []);
+
+  // Avatar Upload
   const uploadAvatar = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
     const reader = new FileReader();
     reader.onload = () => setAvatar(reader.result);
     reader.readAsDataURL(file);
   };
-  
+
+  // Logout
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/login";
+  };
+
   return (
     <div className="min-h-screen flex justify-center items-center bg-background p-6">
       <Card className="w-full max-w-3xl p-4">
@@ -40,7 +57,7 @@ export default function SettingsPage() {
         </CardHeader>
 
         <CardContent className="grid md:grid-cols-2 gap-8 mt-4">
-          {/* Left Side Form */}
+          {/* Left Side */}
           <div className="space-y-4">
             <div>
               <Label>Email</Label>
@@ -57,6 +74,7 @@ export default function SettingsPage() {
                 <SelectTrigger>
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
+
                 <SelectContent>
                   <SelectItem value="Student">Student</SelectItem>
                   <SelectItem value="Teacher">Teacher</SelectItem>
@@ -65,10 +83,17 @@ export default function SettingsPage() {
               </Select>
             </div>
 
-            <Button className="mt-2">Save Changes</Button>
+            <div className="flex gap-3 pt-2">
+              <Button>Save Changes</Button>
+
+              {/* 🔥 Logout Button */}
+              <Button variant="destructive" onClick={handleLogout}>
+                Logout
+              </Button>
+            </div>
           </div>
 
-          {/* Right Side Avatar + Theme */}
+          {/* Right Side */}
           <div className="flex flex-col items-center gap-6">
             <div className="flex flex-col items-center gap-2">
               <div className="relative w-40 h-40 rounded-full overflow-hidden border">
