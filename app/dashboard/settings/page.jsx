@@ -104,12 +104,10 @@ export default function SettingsPage() {
           {/* Right Side */}
           <div className="flex flex-col items-center gap-6">
             <div className="flex flex-col items-center gap-2">
-              <div className="relative w-40 h-40 rounded-full overflow-hidden border">
                 <Avatar className="object-cver rounded-lg grayscale">
                   <AvatarImage src={avatar || "/placeholder.svg"} />
                   <AvatarFallback className="rounded-lg">T</AvatarFallback>
               </Avatar>
-              </div>
               <Input type="file" className="w-40" onChange={uploadAvatar} />
             </div>
 
