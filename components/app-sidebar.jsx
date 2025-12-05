@@ -11,6 +11,7 @@ import {
   IconSearch,
   IconSettings,
   IconInnerShadowTop,
+  IconSchool
 } from "@tabler/icons-react"
 import { Table } from 'lucide-react';
 import { NavMain } from '@/components/nav-main'
@@ -70,7 +71,7 @@ export function AppSidebar(props) {
       navMainItems.push({
         title: "Teachers",
         url: "/dashboard/teachers",
-        icon: IconUsers,
+        icon: IconSchool,
       })
     }
     
